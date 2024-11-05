@@ -20,7 +20,7 @@ public class AlumnoController {
     AlumnoService alumnoService;
     @Autowired
     AlumnoRepository alumnoRepository;
-    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+    @PostMapping(path = "/addAlumno", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<AlumnoDTO> insertAlumno(@Valid @RequestBody AlumnoDTO alumno) {
         AlumnoDTO newAlumno = alumnoService.insert(alumno);
         return ResponseEntity.ok(newAlumno);
