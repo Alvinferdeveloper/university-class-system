@@ -24,5 +24,5 @@ public class AlumnoDTO {
     private String email;
     private String phone;
     private String dni;
-    Carrera carrera;
+    CarreraDTO carrera;
 }

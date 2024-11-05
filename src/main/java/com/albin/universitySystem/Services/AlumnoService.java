@@ -51,6 +51,6 @@ public class AlumnoService implements ICrud<AlumnoDTO> {
     @Override
     public List<AlumnoDTO> findAll() {
         List<Alumno> alumnos = alumnoRepository.findAll();
-        return alumnos.stream().map(alumno -> alumnoMapper.entityToDto(alumno)).toList();
+        return alumnos.stream().map(alumnoMapper::entityToDto).toList();
     }
 }

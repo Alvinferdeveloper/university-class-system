@@ -12,6 +12,10 @@ import java.util.List;
 
 @Component
 public class AlumnoMapper implements IMapper<AlumnoDTO, Alumno> {
+    CarreraMapper carreraMapper;
+    public AlumnoMapper(CarreraMapper carreraMapper) {
+        this.carreraMapper = carreraMapper;
+    }
     @Override
     public  Alumno dtoToEntity(AlumnoDTO alumnoDTO) {
         return Alumno.builder()
@@ -33,7 +37,7 @@ public class AlumnoMapper implements IMapper<AlumnoDTO, Alumno> {
                 .email(alumno.getEmail())
                 .phone(alumno.getPhone())
                 .dni(alumno.getDni())
-                .carrera(alumno.getCarrera())
+                .carrera(carreraMapper.entityToDto(alumno.getCarrera()))
                 .build();
     }
 }

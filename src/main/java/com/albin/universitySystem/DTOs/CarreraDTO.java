@@ -12,7 +12,6 @@ import java.util.List;
 public class CarreraDTO {
     long id;
     String name;
-    List<Profesor> profesores;
     int total_years;
-    List<Alumno> alumnos;
+
 }
