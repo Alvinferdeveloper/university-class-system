@@ -38,9 +38,14 @@ public class AlumnoController {
     }
 
     @PutMapping("/updateAlumno")
-    public ResponseEntity<AlumnoDTO> updateAlumno(@Valid @RequestBody AlumnoDTO alumno) {
+    public ResponseEntity<AlumnoDTO> updateAlumno(@RequestBody AlumnoDTO alumno) {
         AlumnoDTO newAlumno = alumnoService.update(alumno);
         return ResponseEntity.ok(newAlumno);
+    }
+    @DeleteMapping("deleteAlumno/{id}")
+    public ResponseEntity<Void> deleteAlumno(@PathVariable Long id) {
+        alumnoService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -38,9 +38,13 @@ public class AlumnoService implements ICrud<AlumnoDTO> {
     }
 
     @Override
-    public void delete(AlumnoDTO obj) {
-
+    public void delete(long id) {
+        Boolean existAlumno= alumnoRepository.existsById(id);
+        if(!existAlumno)
+            throw new EntityNotFoundException("Alumno no encontrado");
+        alumnoRepository.deleteById(id);
     }
+
 
     @Override
     public AlumnoDTO findById(long id) {
