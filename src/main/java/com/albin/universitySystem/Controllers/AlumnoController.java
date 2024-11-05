@@ -18,8 +18,7 @@ import java.util.Optional;
 public class AlumnoController {
     @Autowired
     AlumnoService alumnoService;
-    @Autowired
-    AlumnoRepository alumnoRepository;
+
     @PostMapping(path = "/addAlumno", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<AlumnoDTO> insertAlumno(@Valid @RequestBody AlumnoDTO alumno) {
         AlumnoDTO newAlumno = alumnoService.insert(alumno);
@@ -27,8 +26,8 @@ public class AlumnoController {
     }
 
     @GetMapping("/getAlumno/{id}")
-    public ResponseEntity<Optional<Alumno>> getAlumnoById(@PathVariable Long id) {
-        Optional<Alumno> alumno = alumnoRepository.findById(id);
+    public ResponseEntity<AlumnoDTO> getAlumnoById(@PathVariable Long id) {
+        AlumnoDTO alumno = alumnoService.findById(id);
         return ResponseEntity.ok(alumno);
     }
 
