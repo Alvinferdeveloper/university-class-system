@@ -1,7 +1,9 @@
 package com.albin.universitySystem.DTOs;
 
-import com.albin.universitySystem.Enums.Autoritie;
-import com.albin.universitySystem.Enums.Role;
+import com.albin.universitySystem.Entitites.Autoritie;
+import com.albin.universitySystem.Entitites.Carrera;
+import com.albin.universitySystem.Entitites.Group;
+import com.albin.universitySystem.Entitites.Role;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,7 +20,8 @@ public class ProfesorDTO {
     private String phone;
     private Date birthDate;
     private String dni;
+    List<Autoritie> autorities;
     Role role;
-    Autoritie autoritites;
-    List<ComponenteDTO> componentes;
+    List<Carrera> carreras;
+    List<Group> groups;
 }

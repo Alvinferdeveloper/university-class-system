@@ -17,20 +17,13 @@ public class ProfesorMapper implements IMapper<ProfesorDTO, Profesor> {
                 .email(profesorDTO.getEmail())
                 .dni(profesorDTO.getDni())
                 .birthDate(profesorDTO.getBirthDate())
+                .autorities(profesorDTO.getAutorities())
+                .role(profesorDTO.getRole())
                 .build();
     }
 
     @Override
     public ProfesorDTO entityToDto(Profesor profesor) {
-        ArrayList<ComponenteDTO> componenteDTOS = (ArrayList<ComponenteDTO>) profesor.getComponentes().stream().map(componente ->
-            ComponenteDTO.builder()
-                    .id(componente.getId())
-                    .name(componente.getName())
-                    .profesor(componente.getProfesor())
-                    .semester(componente.getSemester())
-                    .year(componente.getYear())
-                    .build()
-        ).toList();
         return ProfesorDTO.builder()
                 .id(profesor.getId())
                 .name(profesor.getName())
@@ -38,8 +31,10 @@ public class ProfesorMapper implements IMapper<ProfesorDTO, Profesor> {
                 .phone(profesor.getPhone())
                 .dni(profesor.getDni())
                 .birthDate(profesor.getBirthDate())
+                .autorities(profesor.getAutorities())
+                .carreras(profesor.getCarreras())
+                .groups(profesor.getGroups())
                 .email(profesor.getEmail())
-                .componentes(componenteDTOS)
                 .build();
     }
 }

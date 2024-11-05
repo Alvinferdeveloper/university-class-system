@@ -2,7 +2,9 @@ package com.albin.universitySystem.utils.mappers;
 
 import com.albin.universitySystem.DTOs.AlumnoDTO;
 import com.albin.universitySystem.DTOs.ComponenteDTO;
+import com.albin.universitySystem.DTOs.GroupDTO;
 import com.albin.universitySystem.Entitites.Componente;
+import com.albin.universitySystem.Entitites.Group;
 import com.albin.universitySystem.utils.IMapper;
 import org.springframework.stereotype.Component;
 
@@ -15,31 +17,27 @@ public class ComponenteMapper implements IMapper<ComponenteDTO, Componente> {
     public Componente dtoToEntity(ComponenteDTO componenteDTO) {
         return Componente.builder()
                 .name(componenteDTO.getName())
-                .year(componenteDTO.getYear())
+                .owner_year(componenteDTO.getOwner_year())
                 .semester(componenteDTO.getSemester())
                 .build();
     }
 
     @Override
     public ComponenteDTO entityToDto(Componente componente) {
-        ArrayList<AlumnoDTO> alumnos =(ArrayList<AlumnoDTO>) componente.getAlumnos().stream().map(alumno -> AlumnoDTO.builder()
-                .id(alumno.getId())
-                .name(alumno.getName())
-                .lastName(alumno.getLastName())
-                .phone(alumno.getPhone())
-                .email(alumno.getEmail())
-                .dni(alumno.getDni())
-                .birthDay(alumno.getBirthDate())
+        ArrayList<GroupDTO> groups =(ArrayList<GroupDTO>) componente.getGroups().stream().map(group -> GroupDTO.builder()
+                .id(group.getId())
+                .profesor(group.getProfesor())
+                .componente(group.getComponente())
+                .semester(group.getSemester())
                 .build()
         ).toList();
 
         return ComponenteDTO.builder()
                 .id(componente.getId())
                 .semester(componente.getSemester())
-                .year(componente.getYear())
-                .profesor(componente.getProfesor())
+                .owner_year(componente.getOwner_year())
                 .name(componente.getName())
-                .alumnos(alumnos)
+                .groups(groups)
                 .build();
     }
 }

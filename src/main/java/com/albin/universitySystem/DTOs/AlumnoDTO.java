@@ -1,5 +1,6 @@
 package com.albin.universitySystem.DTOs;
 
+import com.albin.universitySystem.Entitites.Carrera;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +24,5 @@ public class AlumnoDTO {
     private String email;
     private String phone;
     private String dni;
-    List<ComponenteDTO> componentes ;
+    Carrera carrera;
 }

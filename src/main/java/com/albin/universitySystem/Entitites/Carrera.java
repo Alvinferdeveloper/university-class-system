@@ -20,5 +20,8 @@ public class Carrera {
     String name;
     @ManyToMany(mappedBy = "carreras")
     List<Profesor> profesores;
+    int total_years;
+    @OneToMany(mappedBy = "carrera")
+    List<Alumno> alumnos;
 
 }

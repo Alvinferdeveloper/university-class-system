@@ -1,13 +1,12 @@
 package com.albin.universitySystem.Entitites;
 
-import com.albin.universitySystem.Enums.Autoritie;
-import com.albin.universitySystem.Enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import java.util.List;
 public class Profesor {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    long id;
+    private long id;
     @Column(nullable = false, length = 50)
     String name;
     String lastName;
@@ -29,16 +28,19 @@ public class Profesor {
     @Column(nullable = false)
     Date birthDate;
     String dni;
-    @OneToMany(mappedBy = "profesor", fetch = FetchType.EAGER)
-    List<Componente> componentes;
-    @Enumerated(EnumType.STRING)
-    Autoritie autoritie;
-    @Enumerated(EnumType.STRING)
+    @ManyToMany
+    @JoinTable(name = "profesor_autoritie", joinColumns = @JoinColumn(name = "profesor_id"),
+    inverseJoinColumns = @JoinColumn(name = "autoritie_id"))
+    List<Autoritie> autorities;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     Role role;
     @ManyToMany
     @JoinTable( name = "profesor_carrera", joinColumns = @JoinColumn(name = "profesor_id"),
     inverseJoinColumns = @JoinColumn(name = "carrera_id"))
     List<Carrera> carreras;
+    @OneToMany(mappedBy = "profesor")
+    List<Group> groups;
 
 
 }

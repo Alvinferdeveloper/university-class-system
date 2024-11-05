@@ -1,6 +1,6 @@
 package com.albin.universitySystem.DTOs;
 
-import com.albin.universitySystem.Entitites.Profesor;
+import com.albin.universitySystem.Entitites.Group;
 import com.albin.universitySystem.Enums.Semester;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,8 +16,7 @@ import java.util.List;
 public class ComponenteDTO {
     private long id;
     private String name;
-    private int year;
-    List<AlumnoDTO> alumnos;
-    Profesor profesor;
+    private int owner_year;
     Semester semester;
+    List<GroupDTO> groups;
 }

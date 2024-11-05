@@ -25,4 +25,7 @@ public class Alumno {
     String phone;
     Date birthDate;
     String dni;
+    @ManyToOne
+    @JoinColumn(name = "carrera_id")
+    Carrera carrera;
 }

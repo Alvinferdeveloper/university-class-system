@@ -1,7 +1,18 @@
 package com.albin.universitySystem.DTOs;
 
-public record CarreraDTO(
-        long id,
-        String name
-) {
+import com.albin.universitySystem.Entitites.Alumno;
+import com.albin.universitySystem.Entitites.Profesor;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
+
+import java.util.List;
+@Data
+@Builder
+public class CarreraDTO {
+    long id;
+    String name;
+    List<Profesor> profesores;
+    int total_years;
+    List<Alumno> alumnos;
 }

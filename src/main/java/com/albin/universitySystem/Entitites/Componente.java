@@ -21,11 +21,8 @@ public class Componente {
     @Column(unique=true, nullable = false)
     String name;
     int owner_year;
-    @ManyToMany(mappedBy = "componentes", fetch = FetchType.EAGER)
-    List<Alumno> alumnos;
-    @ManyToOne
-    @JoinColumn(name="profesor_id")
-    Profesor profesor;
     @Enumerated(EnumType.STRING)
     Semester semester;
+    @OneToMany(mappedBy = "componente")
+    List<Group> groups;
 }
