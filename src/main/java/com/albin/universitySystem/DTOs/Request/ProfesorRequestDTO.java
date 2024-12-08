@@ -1,4 +1,4 @@
-package com.albin.universitySystem.DTOs;
+package com.albin.universitySystem.DTOs.Request;
 
 import com.albin.universitySystem.Entitites.Autoritie;
 import com.albin.universitySystem.Entitites.Carrera;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ProfesorDTO {
+public class ProfesorRequestDTO {
     private long id;
     private String name;
     private String lastName;

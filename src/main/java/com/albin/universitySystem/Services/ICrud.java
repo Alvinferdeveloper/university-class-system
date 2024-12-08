@@ -1,11 +1,14 @@
 package com.albin.universitySystem.Services;
 
+import com.albin.universitySystem.DTOs.Request.AlumnoRequestDTO;
+import com.albin.universitySystem.DTOs.Response.AlumnoResponseDTO;
+
 import java.util.List;
 
-public interface ICrud<V> {
-    public V insert(V obj);
-    public V update(V obj);
+public interface ICrud<V, K> {
+    public K insert(V obj);
+    public K update(V obj);
     public void delete(long id);
-    public V findById(long id);
-    public List<V> findAll();
+    public K findById(long id);
+    public List<K> findAll();
 }

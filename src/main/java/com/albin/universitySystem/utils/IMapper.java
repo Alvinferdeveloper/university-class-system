@@ -1,7 +1,7 @@
 package com.albin.universitySystem.utils;
 
-public interface IMapper<D, E> {
+public interface IMapper<D, E, K> {
     E dtoToEntity(D dto);
 
-    D entityToDto(E dto);
+    K entityToDto(E dto);
 }

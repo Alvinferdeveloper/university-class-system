@@ -1,31 +1,36 @@
 package com.albin.universitySystem.Services;
 
-import com.albin.universitySystem.DTOs.AlumnoDTO;
+import com.albin.universitySystem.DTOs.Request.AlumnoRequestDTO;
+import com.albin.universitySystem.DTOs.Response.AlumnoResponseDTO;
 import com.albin.universitySystem.Entitites.Alumno;
+import com.albin.universitySystem.Entitites.Carrera;
 import com.albin.universitySystem.Repositories.AlumnoRepository;
+import com.albin.universitySystem.Repositories.CarreraRepository;
 import com.albin.universitySystem.utils.mappers.AlumnoMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AlumnoService implements ICrud<AlumnoDTO> {
-    @Autowired
-    AlumnoRepository alumnoRepository;
-    @Autowired
-    AlumnoMapper alumnoMapper;
+@RequiredArgsConstructor
+public class AlumnoService implements ICrud<AlumnoRequestDTO,AlumnoResponseDTO> {
+    private final AlumnoRepository alumnoRepository;
+    private final AlumnoMapper alumnoMapper;
+    private final CarreraRepository carreraRepository;
 
     @Override
-    public AlumnoDTO insert(AlumnoDTO alumno) {
+    public AlumnoResponseDTO insert(AlumnoRequestDTO alumno) {
         Alumno newAlumno = alumnoMapper.dtoToEntity(alumno);
+        Carrera carrera = carreraRepository.findById(alumno.getCarrera_id()).orElseThrow(EntityNotFoundException::new);
+        newAlumno.setCarrera(carrera);
         Alumno alumnoDoc = alumnoRepository.save(newAlumno);
         return alumnoMapper.entityToDto(alumnoDoc);
     }
 
     @Override
-    public AlumnoDTO update(AlumnoDTO alumno) {
+    public AlumnoResponseDTO update(AlumnoRequestDTO alumno) {
         Alumno alumnoOptional = alumnoRepository.findById(alumno.getId()).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
         alumnoOptional.setName(alumno.getName());
         alumnoOptional.setEmail(alumno.getEmail());
@@ -47,13 +52,13 @@ public class AlumnoService implements ICrud<AlumnoDTO> {
 
 
     @Override
-    public AlumnoDTO findById(long id) {
+    public AlumnoResponseDTO findById(long id) {
         Alumno alumno = alumnoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
         return alumnoMapper.entityToDto(alumno);
     }
 
     @Override
-    public List<AlumnoDTO> findAll() {
+    public List<AlumnoResponseDTO> findAll() {
         List<Alumno> alumnos = alumnoRepository.findAll();
         return alumnos.stream().map(alumnoMapper::entityToDto).toList();
     }

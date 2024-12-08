@@ -1,20 +1,19 @@
 package com.albin.universitySystem.utils.mappers;
 
-import com.albin.universitySystem.DTOs.AlumnoDTO;
-import com.albin.universitySystem.DTOs.ComponenteDTO;
+import com.albin.universitySystem.DTOs.Request.ComponenteRequestDTO;
 import com.albin.universitySystem.DTOs.GroupDTO;
+import com.albin.universitySystem.DTOs.Response.ComponenteResponseDTO;
 import com.albin.universitySystem.Entitites.Componente;
-import com.albin.universitySystem.Entitites.Group;
 import com.albin.universitySystem.utils.IMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 @Component
-public class ComponenteMapper implements IMapper<ComponenteDTO, Componente> {
+public class ComponenteMapper implements IMapper<ComponenteRequestDTO, Componente, ComponenteResponseDTO> {
 
     @Override
-    public Componente dtoToEntity(ComponenteDTO componenteDTO) {
+    public Componente dtoToEntity(ComponenteRequestDTO componenteDTO) {
         return Componente.builder()
                 .name(componenteDTO.getName())
                 .owner_year(componenteDTO.getOwner_year())
@@ -23,7 +22,7 @@ public class ComponenteMapper implements IMapper<ComponenteDTO, Componente> {
     }
 
     @Override
-    public ComponenteDTO entityToDto(Componente componente) {
+    public ComponenteResponseDTO entityToDto(Componente componente) {
         ArrayList<GroupDTO> groups =(ArrayList<GroupDTO>) componente.getGroups().stream().map(group -> GroupDTO.builder()
                 .id(group.getId())
                 .profesor(group.getProfesor())
@@ -32,12 +31,11 @@ public class ComponenteMapper implements IMapper<ComponenteDTO, Componente> {
                 .build()
         ).toList();
 
-        return ComponenteDTO.builder()
+        return ComponenteResponseDTO.builder()
                 .id(componente.getId())
                 .semester(componente.getSemester())
                 .owner_year(componente.getOwner_year())
                 .name(componente.getName())
-                .groups(groups)
                 .build();
     }
 }

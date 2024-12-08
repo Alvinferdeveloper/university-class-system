@@ -26,6 +26,6 @@ public class Alumno {
     Date birthDate;
     String dni;
     @ManyToOne
-    @JoinColumn(name = "carrera_id")
+    @JoinColumn(name = "carrera_id", nullable = false)
     Carrera carrera;
 }

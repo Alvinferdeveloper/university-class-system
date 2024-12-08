@@ -1,23 +1,21 @@
 package com.albin.universitySystem.utils.mappers;
 
-import com.albin.universitySystem.DTOs.AlumnoDTO;
-import com.albin.universitySystem.DTOs.CarreraDTO;
-import com.albin.universitySystem.DTOs.ComponenteDTO;
+import com.albin.universitySystem.DTOs.Request.AlumnoRequestDTO;
+import com.albin.universitySystem.DTOs.Response.AlumnoResponseDTO;
 import com.albin.universitySystem.Entitites.Alumno;
 import com.albin.universitySystem.utils.IMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
 @Component
-public class AlumnoMapper implements IMapper<AlumnoDTO, Alumno> {
+public class AlumnoMapper implements IMapper<AlumnoRequestDTO, Alumno, AlumnoResponseDTO> {
     CarreraMapper carreraMapper;
     public AlumnoMapper(CarreraMapper carreraMapper) {
         this.carreraMapper = carreraMapper;
     }
     @Override
-    public  Alumno dtoToEntity(AlumnoDTO alumnoDTO) {
+    public  Alumno dtoToEntity(AlumnoRequestDTO alumnoDTO) {
         return Alumno.builder()
                 .name(alumnoDTO.getName())
                 .lastName(alumnoDTO.getLastName())
@@ -28,14 +26,15 @@ public class AlumnoMapper implements IMapper<AlumnoDTO, Alumno> {
                 .build();
     }
     @Override
-    public AlumnoDTO entityToDto(Alumno alumno) {
-        return AlumnoDTO.builder()
+    public AlumnoResponseDTO entityToDto(Alumno alumno) {
+
+        return AlumnoResponseDTO.builder()
                 .id(alumno.getId())
                 .birthDay(alumno.getBirthDate())
-                .lastName(alumno.getLastName())
                 .name(alumno.getName())
-                .email(alumno.getEmail())
+                .lastName(alumno.getLastName())
                 .phone(alumno.getPhone())
+                .email(alumno.getEmail())
                 .dni(alumno.getDni())
                 .carrera(carreraMapper.entityToDto(alumno.getCarrera()))
                 .build();

@@ -1,15 +1,13 @@
 package com.albin.universitySystem.utils.mappers;
 
-import com.albin.universitySystem.DTOs.ComponenteDTO;
-import com.albin.universitySystem.DTOs.ProfesorDTO;
+import com.albin.universitySystem.DTOs.Request.ProfesorRequestDTO;
+import com.albin.universitySystem.DTOs.Response.ProfesorResponseDTO;
 import com.albin.universitySystem.Entitites.Profesor;
 import com.albin.universitySystem.utils.IMapper;
 
-import java.util.ArrayList;
-
-public class ProfesorMapper implements IMapper<ProfesorDTO, Profesor> {
+public class ProfesorMapper implements IMapper<ProfesorRequestDTO, Profesor, ProfesorResponseDTO> {
     @Override
-    public Profesor dtoToEntity(ProfesorDTO profesorDTO) {
+    public Profesor dtoToEntity(ProfesorRequestDTO profesorDTO) {
         return Profesor.builder()
                 .name(profesorDTO.getName())
                 .lastName(profesorDTO.getLastName())
@@ -23,8 +21,8 @@ public class ProfesorMapper implements IMapper<ProfesorDTO, Profesor> {
     }
 
     @Override
-    public ProfesorDTO entityToDto(Profesor profesor) {
-        return ProfesorDTO.builder()
+    public ProfesorResponseDTO entityToDto(Profesor profesor) {
+        return ProfesorResponseDTO.builder()
                 .id(profesor.getId())
                 .name(profesor.getName())
                 .lastName(profesor.getLastName())
@@ -32,8 +30,6 @@ public class ProfesorMapper implements IMapper<ProfesorDTO, Profesor> {
                 .dni(profesor.getDni())
                 .birthDate(profesor.getBirthDate())
                 .autorities(profesor.getAutorities())
-                .carreras(profesor.getCarreras())
-                .groups(profesor.getGroups())
                 .email(profesor.getEmail())
                 .build();
     }

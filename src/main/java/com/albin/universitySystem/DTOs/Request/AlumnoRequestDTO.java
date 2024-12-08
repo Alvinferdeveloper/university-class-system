@@ -1,20 +1,19 @@
-package com.albin.universitySystem.DTOs;
+package com.albin.universitySystem.DTOs.Request;
 
-import com.albin.universitySystem.Entitites.Carrera;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder
 @Setter
 @Getter
-public class AlumnoDTO {
+public class AlumnoRequestDTO {
     private long id;
     private Date birthDay;
     @NotBlank(message = "El campo no puede ser nulo")
@@ -24,5 +23,6 @@ public class AlumnoDTO {
     private String email;
     private String phone;
     private String dni;
-    CarreraDTO carrera;
+    @NotNull(message = "Debes proporcionar una carrers")
+    private Long carrera_id;
 }
