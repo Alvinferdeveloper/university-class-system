@@ -9,8 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CarreraMapper implements IMapper<CarreraRequestDTO, Carrera, CarreraResponseDTO> {
     @Override
-    public Carrera dtoToEntity(CarreraRequestDTO dto) {
-        return null;
+    public Carrera dtoToEntity(CarreraRequestDTO carreraRequest) {
+        return Carrera.builder()
+                .name(carreraRequest.getName())
+                .total_years(carreraRequest.getTotal_years())
+                .build();
     }
 
     @Override
