@@ -23,7 +23,7 @@ public class AlumnoService implements ICrud<AlumnoRequestDTO,AlumnoResponseDTO> 
     @Override
     public AlumnoResponseDTO insert(AlumnoRequestDTO alumno) {
         Alumno newAlumno = alumnoMapper.dtoToEntity(alumno);
-        Carrera carrera = carreraRepository.findById(alumno.getCarrera_id()).orElseThrow(EntityNotFoundException::new);
+        Carrera carrera = carreraRepository.findById(alumno.getCarreraId()).orElseThrow(EntityNotFoundException::new);
         newAlumno.setCarrera(carrera);
         Alumno alumnoDoc = alumnoRepository.save(newAlumno);
         return alumnoMapper.entityToDto(alumnoDoc);
@@ -31,14 +31,18 @@ public class AlumnoService implements ICrud<AlumnoRequestDTO,AlumnoResponseDTO> 
 
     @Override
     public AlumnoResponseDTO update(AlumnoRequestDTO alumno) {
-        Alumno alumnoOptional = alumnoRepository.findById(alumno.getId()).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
-        alumnoOptional.setName(alumno.getName());
-        alumnoOptional.setEmail(alumno.getEmail());
-        alumnoOptional.setLastName(alumno.getLastName());
-        alumnoOptional.setPhone(alumno.getPhone());
-        alumnoOptional.setDni(alumno.getDni());
-        alumnoOptional.setBirthDate(alumno.getBirthDay());
-        Alumno alumnoUpdated = alumnoRepository.save(alumnoOptional);
+        Alumno alumnoDoc = alumnoRepository.findById(alumno.getId()).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
+        alumnoDoc.setName(alumno.getName());
+        alumnoDoc.setEmail(alumno.getEmail());
+        alumnoDoc.setLastName(alumno.getLastName());
+        alumnoDoc.setPhone(alumno.getPhone());
+        alumnoDoc.setDni(alumno.getDni());
+        alumnoDoc.setBirthDate(alumno.getBirthDay());
+        if(alumno.getCarreraId() != null ){
+            Carrera carrera = carreraRepository.findById(alumno.getCarreraId()).orElseThrow(EntityNotFoundException::new);
+            alumnoDoc.setCarrera(carrera);
+        }
+        Alumno alumnoUpdated = alumnoRepository.save(alumnoDoc);
         return alumnoMapper.entityToDto(alumnoUpdated);
     }
 

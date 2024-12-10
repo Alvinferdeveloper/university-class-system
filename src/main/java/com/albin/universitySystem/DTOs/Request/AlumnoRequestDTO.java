@@ -24,5 +24,5 @@ public class AlumnoRequestDTO {
     private String phone;
     private String dni;
     @NotNull(message = "Debes proporcionar una carrers")
-    private Long carrera_id;
+    private Long carreraId;
 }
