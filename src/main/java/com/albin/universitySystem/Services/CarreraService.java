@@ -37,7 +37,11 @@ public class CarreraService implements   ICrud<CarreraRequestDTO, CarreraRespons
 
     @Override
     public void delete(long id) {
-
+        boolean carreraExists = carreraRepository.existsById(id);
+        if(!carreraExists){
+            throw new EntityNotFoundException("Carrera not found");
+        }
+        carreraRepository.deleteById(id);
     }
 
     @Override
