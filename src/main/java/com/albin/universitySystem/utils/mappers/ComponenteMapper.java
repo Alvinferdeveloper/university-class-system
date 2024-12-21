@@ -23,14 +23,6 @@ public class ComponenteMapper implements IMapper<ComponenteRequestDTO, Component
 
     @Override
     public ComponenteResponseDTO entityToDto(Componente componente) {
-        ArrayList<GroupDTO> groups =(ArrayList<GroupDTO>) componente.getGroups().stream().map(group -> GroupDTO.builder()
-                .id(group.getId())
-                .profesor(group.getProfesor())
-                .componente(group.getComponente())
-                .semester(group.getSemester())
-                .build()
-        ).toList();
-
         return ComponenteResponseDTO.builder()
                 .id(componente.getId())
                 .semester(componente.getSemester())

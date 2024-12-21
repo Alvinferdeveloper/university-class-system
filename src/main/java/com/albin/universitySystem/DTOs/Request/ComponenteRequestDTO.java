@@ -2,6 +2,7 @@ package com.albin.universitySystem.DTOs.Request;
 
 import com.albin.universitySystem.DTOs.GroupDTO;
 import com.albin.universitySystem.Enums.Semester;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.List;
 @Builder
 public class ComponenteRequestDTO {
     private long id;
+    @NotNull
     private String name;
     private int owner_year;
     Semester semester;
