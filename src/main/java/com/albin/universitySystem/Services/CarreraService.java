@@ -5,6 +5,7 @@ import com.albin.universitySystem.DTOs.Response.CarreraResponseDTO;
 import com.albin.universitySystem.Entitites.Carrera;
 import com.albin.universitySystem.Repositories.CarreraRepository;
 import com.albin.universitySystem.utils.mappers.CarreraMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,8 @@ public class CarreraService implements   ICrud<CarreraRequestDTO, CarreraRespons
 
     @Override
     public CarreraResponseDTO findById(long id) {
-        return null;
+        Carrera carrera = carreraRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Carrera no encontrada"));
+        return carreraMapper.entityToDto(carrera);
     }
 
     @Override
