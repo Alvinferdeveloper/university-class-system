@@ -9,7 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -42,6 +44,7 @@ public class CarreraService implements   ICrud<CarreraRequestDTO, CarreraRespons
 
     @Override
     public List<CarreraResponseDTO> findAll() {
-        return List.of();
+        List<Carrera> carreras = carreraRepository.findAll();
+        return carreras.stream().map(carreraMapper::entityToDto).toList();
     }
 }

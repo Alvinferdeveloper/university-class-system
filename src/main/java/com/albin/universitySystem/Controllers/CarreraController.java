@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/carrera")
 @RequiredArgsConstructor
@@ -23,5 +25,10 @@ public class CarreraController {
     public ResponseEntity<CarreraResponseDTO> getCarrera(@PathVariable Long id) {
         CarreraResponseDTO carrera = carreraService.findById(id);
         return ResponseEntity.ok().body(carrera);
+    }
+    @GetMapping("/getAllCarreras")
+    public ResponseEntity<List<CarreraResponseDTO>> getAllCarreras() {
+        List<CarreraResponseDTO> carreras = carreraService.findAll();
+        return ResponseEntity.ok().body(carreras);
     }
 }
