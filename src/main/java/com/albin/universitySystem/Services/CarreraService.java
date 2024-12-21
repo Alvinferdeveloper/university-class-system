@@ -27,8 +27,12 @@ public class CarreraService implements   ICrud<CarreraRequestDTO, CarreraRespons
     }
 
     @Override
-    public CarreraResponseDTO update(CarreraRequestDTO carreraReques) {
-        return null;
+    public CarreraResponseDTO update(CarreraRequestDTO carreraRequest) {
+        Carrera carrera = carreraRepository.findById(carreraRequest.getId()).orElseThrow(()-> new EntityNotFoundException("Carrera not found"));
+        carrera.setName(carreraRequest.getName());
+        carrera.setTotal_years(carreraRequest.getTotal_years());
+        Carrera carrerUpdated = carreraRepository.save(carrera);
+        return carreraMapper.entityToDto(carrerUpdated);
     }
 
     @Override

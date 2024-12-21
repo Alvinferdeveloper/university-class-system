@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CarreraRequestDTO {
+    Long id;
     @NotNull
     String name;
     @NotNull

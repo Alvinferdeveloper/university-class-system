@@ -31,4 +31,10 @@ public class CarreraController {
         List<CarreraResponseDTO> carreras = carreraService.findAll();
         return ResponseEntity.ok().body(carreras);
     }
+
+    @PutMapping("/updateCarrera")
+    public ResponseEntity<CarreraResponseDTO> updateCarrera(@RequestBody CarreraRequestDTO carreraReq){
+        CarreraResponseDTO carrera = carreraService.update(carreraReq);
+        return ResponseEntity.ok().body(carrera);
+    }
 }
