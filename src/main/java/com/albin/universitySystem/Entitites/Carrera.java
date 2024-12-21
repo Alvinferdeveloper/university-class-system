@@ -23,5 +23,7 @@ public class Carrera {
     int total_years;
     @OneToMany(mappedBy = "carrera")
     List<Alumno> alumnos;
+    @OneToMany(mappedBy = "carrera")
+    List<Componente> componentes;
 
 }

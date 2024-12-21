@@ -25,4 +25,7 @@ public class Componente {
     Semester semester;
     @OneToMany(mappedBy = "componente")
     List<Group> groups;
+    @ManyToOne
+    @JoinColumn(name = "carrera_id")
+    Carrera carrera;
 }
