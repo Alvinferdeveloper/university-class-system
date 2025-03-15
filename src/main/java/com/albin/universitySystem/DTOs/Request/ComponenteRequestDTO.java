@@ -17,11 +17,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ComponenteRequestDTO {
-    private long id;
+    Long id;
     @NotNull
     private String name;
     private int owner_year;
-    Semester semester;
-    @NotNull(message = "El id de la carrera no puede ser null")
-    Long carreraId;
+    private Semester semester;
+    @NotNull(message = "carrera can not be null")
+    private Long carreraId;
 }
