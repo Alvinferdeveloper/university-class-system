@@ -39,7 +39,8 @@ public class ComponenteService implements  ICrud<ComponenteRequestDTO, Component
 
     @Override
     public ComponenteResponseDTO findById(long id) {
-        return null;
+        Componente componente = componenteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No se encontro el componente"));
+        return componenteMapper.entityToDto(componente);
     }
 
     @Override
