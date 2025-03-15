@@ -23,4 +23,10 @@ public class ComponenteController {
         ComponenteResponseDTO componente =  componenteService.findById(id);
         return ResponseEntity.ok(componente);
     }
+
+    @PutMapping("/updateComponente")
+    public ResponseEntity<ComponenteResponseDTO> updateComponente(@Valid @RequestBody ComponenteRequestDTO componente) {
+        ComponenteResponseDTO newComponente = componenteService.update(componente);
+        return ResponseEntity.ok(newComponente);
+    }
 }

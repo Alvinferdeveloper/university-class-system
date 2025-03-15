@@ -20,7 +20,9 @@ public class ComponenteRequestDTO {
     Long id;
     @NotNull
     private String name;
-    private int owner_year;
+    @NotNull
+    private Integer owner_year;
+    @NotNull
     private Semester semester;
     @NotNull(message = "carrera can not be null")
     private Long carreraId;
