@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/componente")
 @AllArgsConstructor
@@ -28,5 +30,17 @@ public class ComponenteController {
     public ResponseEntity<ComponenteResponseDTO> updateComponente(@Valid @RequestBody ComponenteRequestDTO componente) {
         ComponenteResponseDTO newComponente = componenteService.update(componente);
         return ResponseEntity.ok(newComponente);
+    }
+
+    @GetMapping("/getAllComponentes")
+    public ResponseEntity<List<ComponenteResponseDTO>> getAllComponentes() {
+        List<ComponenteResponseDTO> componentes = componenteService.findAll();
+        return ResponseEntity.ok(componentes);
+    }
+
+    @DeleteMapping("/deleteComponente/{id}")
+    public ResponseEntity<Void> deleteComponente(@PathVariable Long id) {
+        componenteService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

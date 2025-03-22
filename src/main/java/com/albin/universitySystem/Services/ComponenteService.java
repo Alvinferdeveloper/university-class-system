@@ -40,7 +40,9 @@ public class ComponenteService implements  ICrud<ComponenteRequestDTO, Component
 
     @Override
     public void delete(long id) {
-
+        Componente componente = componenteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontró el componente"));
+        componenteRepository.delete(componente);
     }
 
     @Override
@@ -51,6 +53,9 @@ public class ComponenteService implements  ICrud<ComponenteRequestDTO, Component
 
     @Override
     public List<ComponenteResponseDTO> findAll() {
-        return List.of();
+        List<Componente> componentes = componenteRepository.findAll();
+        return componentes.stream()
+                .map(componenteMapper::entityToDto)
+                .toList();
     }
 }
