@@ -61,8 +61,12 @@ public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
 
     @Override
     @Transactional
-    public GroupResponseDTO update(GroupRequestDTO groupRequest) {
-        Group group = groupMapper.dtoToEntity(groupRequest);
+    public GroupResponseDTO update(Long id, GroupRequestDTO groupRequest) {
+        Group group = groupRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Group not found with id: " + id));
+        Profesor profesor = profesorRepository.findById(groupRequest.getProfesorId()).orElseThrow(()-> new EntityNotFoundException("Profesor Not Found"));
+        Componente componente = componenteRepository.findById(groupRequest.getComponenteId()).orElseThrow(()-> new EntityNotFoundException("Componente Not Found"));
+        group.setProfesor(profesor);
+        group.setComponente(componente);
         Group updatedGroup = groupRepository.save(group);
         return groupMapper.entityToDto(updatedGroup);
     }

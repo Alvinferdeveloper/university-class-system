@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ComponenteRequestDTO {
-    Long id;
     @NotNull
     private String name;
     @NotNull

@@ -28,8 +28,8 @@ public class ComponenteService implements  ICrud<ComponenteRequestDTO, Component
     }
 
     @Override
-    public ComponenteResponseDTO update(ComponenteRequestDTO componenteRequest) {
-        Componente componente = componenteRepository.findById(componenteRequest.getId()).orElseThrow(()-> new EntityNotFoundException("No se encontro la componente"));
+    public ComponenteResponseDTO update(Long id, ComponenteRequestDTO componenteRequest) {
+        Componente componente = componenteRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("No se encontro la componente"));
         componente.setOwner_year(componenteRequest.getOwner_year());
         componente.setName(componenteRequest.getName());
         componente.setSemester(componenteRequest.getSemester());

@@ -35,9 +35,11 @@ public class AlumnoController {
         return ResponseEntity.ok(alumnos);
     }
 
-    @PutMapping("/updateAlumno")
-    public ResponseEntity<AlumnoResponseDTO> updateAlumno(@RequestBody AlumnoRequestDTO alumno) {
-        AlumnoResponseDTO newAlumno = alumnoService.update(alumno);
+    @PutMapping("/updateAlumno/{id}")
+    public ResponseEntity<AlumnoResponseDTO> updateAlumno(
+            @PathVariable Long id,
+            @RequestBody AlumnoRequestDTO alumno) {
+        AlumnoResponseDTO newAlumno = alumnoService.update(id, alumno);
         return ResponseEntity.ok(newAlumno);
     }
     @DeleteMapping("deleteAlumno/{id}")

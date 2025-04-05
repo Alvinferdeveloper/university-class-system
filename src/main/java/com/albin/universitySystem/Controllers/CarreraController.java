@@ -32,9 +32,12 @@ public class CarreraController {
         return ResponseEntity.ok().body(carreras);
     }
 
-    @PutMapping("/updateCarrera")
-    public ResponseEntity<CarreraResponseDTO> updateCarrera(@RequestBody CarreraRequestDTO carreraReq){
-        CarreraResponseDTO carrera = carreraService.update(carreraReq);
+    @PutMapping("/updateCarrera/{id}")
+    public ResponseEntity<CarreraResponseDTO> updateCarrera(
+            @RequestBody CarreraRequestDTO carreraReq,
+            @PathVariable Long id
+    ){
+        CarreraResponseDTO carrera = carreraService.update(id, carreraReq);
         return ResponseEntity.ok().body(carrera);
     }
     @DeleteMapping("/deleteCarrera/{id}")

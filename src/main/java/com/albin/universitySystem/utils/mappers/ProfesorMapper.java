@@ -12,7 +12,6 @@ public class ProfesorMapper implements IMapper<ProfesorRequestDTO, Profesor,  Pr
     @Override
     public Profesor dtoToEntity(ProfesorRequestDTO dto) {
         return Profesor.builder()
-                .id(dto.getId())
                 .name(dto.getName())
                 .lastName(dto.getLastName())
                 .phone(dto.getPhone())

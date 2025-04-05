@@ -30,8 +30,8 @@ public class AlumnoService implements ICrud<AlumnoRequestDTO,AlumnoResponseDTO> 
     }
 
     @Override
-    public AlumnoResponseDTO update(AlumnoRequestDTO alumno) {
-        Alumno alumnoDoc = alumnoRepository.findById(alumno.getId()).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
+    public AlumnoResponseDTO update(Long id, AlumnoRequestDTO alumno) {
+        Alumno alumnoDoc = alumnoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
         alumnoDoc.setName(alumno.getName());
         alumnoDoc.setEmail(alumno.getEmail());
         alumnoDoc.setLastName(alumno.getLastName());

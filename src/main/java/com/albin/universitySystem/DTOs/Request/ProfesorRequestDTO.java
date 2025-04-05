@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @Builder
 public class ProfesorRequestDTO {
-    private long id;
     private String name;
     private String lastName;
     private String email;

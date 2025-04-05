@@ -14,7 +14,6 @@ import java.util.Date;
 @Setter
 @Getter
 public class AlumnoRequestDTO {
-    private long id;
     private Date birthDay;
     @NotBlank(message = "El campo no puede ser nulo")
     private String name;

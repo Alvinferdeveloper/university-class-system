@@ -40,8 +40,10 @@ public class GroupController {
 
     @PutMapping("updateGroup/{id}")
     public ResponseEntity<GroupResponseDTO> updateGroup(
-            @Valid @RequestBody GroupRequestDTO group) {
-        GroupResponseDTO newGroup = groupService.update(group);
+            @Valid @RequestBody GroupRequestDTO group,
+            @PathVariable Long id
+    ) {
+        GroupResponseDTO newGroup = groupService.update(id,group);
         return ResponseEntity.ok(newGroup);
     }
 
