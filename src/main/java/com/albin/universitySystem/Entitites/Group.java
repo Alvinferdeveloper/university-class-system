@@ -3,6 +3,7 @@ package com.albin.universitySystem.Entitites;
 import com.albin.universitySystem.Enums.Semester;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "class_group")
 public class Group {
     @Id
@@ -23,4 +25,6 @@ public class Group {
     Componente componente;
     @Enumerated(EnumType.STRING)
     Semester semester;
+    @Column(nullable = false)
+    Integer year;
 }
