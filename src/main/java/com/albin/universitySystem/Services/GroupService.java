@@ -35,12 +35,7 @@ public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
     @Transactional
     public GroupResponseDTO insert(GroupRequestDTO groupRequest) {
         Group group = groupMapper.dtoToEntity(groupRequest);
-        Profesor profesor = profesorRepository.findById(groupRequest.getProfesorId()).orElseThrow(()-> new EntityNotFoundException("Profesor Not Found"));
-        Componente componente = componenteRepository.findById(groupRequest.getComponenteId()).orElseThrow(()-> new EntityNotFoundException("Componente Not Found"));
-        group.setProfesor(profesor);
-        group.setComponente(componente);
-        Group savedGroup = groupRepository.save(group);
-        return groupMapper.entityToDto(savedGroup);
+        return getGroupResponseDTO(groupRequest, group);
     }
 
     @Override
@@ -63,10 +58,15 @@ public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
     @Transactional
     public GroupResponseDTO update(Long id, GroupRequestDTO groupRequest) {
         Group group = groupRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Group not found with id: " + id));
+        return getGroupResponseDTO(groupRequest, group);
+    }
+
+    private GroupResponseDTO getGroupResponseDTO(GroupRequestDTO groupRequest, Group group) {
         Profesor profesor = profesorRepository.findById(groupRequest.getProfesorId()).orElseThrow(()-> new EntityNotFoundException("Profesor Not Found"));
         Componente componente = componenteRepository.findById(groupRequest.getComponenteId()).orElseThrow(()-> new EntityNotFoundException("Componente Not Found"));
         group.setProfesor(profesor);
         group.setComponente(componente);
+        group.setYear(groupRequest.getYear());
         Group updatedGroup = groupRepository.save(group);
         return groupMapper.entityToDto(updatedGroup);
     }
