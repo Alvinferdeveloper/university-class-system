@@ -20,5 +20,5 @@ public class ProfesorResponseDTO {
     private Date birthDate;
     private String dni;
     List<Autoritie> autorities;
-    Role role;
+    RoleResponseDTO role;
 }
