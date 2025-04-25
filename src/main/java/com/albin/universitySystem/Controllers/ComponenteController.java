@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/componente")
+@RequestMapping("/api/v1/componente")
 @AllArgsConstructor
 public class ComponenteController {
     private final ComponenteService componenteService;

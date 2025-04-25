@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/carrera")
+@RequestMapping("/api/v1/carrera")
 @RequiredArgsConstructor
 public class CarreraController {
     private final CarreraService carreraService;
