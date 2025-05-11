@@ -7,12 +7,14 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/alumno")
+@PreAuthorize("denyAll()")
 public class AlumnoController {
     @Autowired
     AlumnoService alumnoService;
@@ -24,6 +26,7 @@ public class AlumnoController {
     }
 
     @GetMapping("/getAlumno/{id}")
+    @PreAuthorize("hasRole('PROFESOR')")
     public ResponseEntity<AlumnoResponseDTO> getAlumnoById(@PathVariable Long id) {
         AlumnoResponseDTO alumno = alumnoService.findById(id);
         return ResponseEntity.ok(alumno);
@@ -43,6 +46,7 @@ public class AlumnoController {
         return ResponseEntity.ok(newAlumno);
     }
     @DeleteMapping("deleteAlumno/{id}")
+    @PreAuthorize("hasAuthority('DELETE_ALUMNO')")
     public ResponseEntity<Void> deleteAlumno(@PathVariable Long id) {
         alumnoService.delete(id);
         return ResponseEntity.ok().build();

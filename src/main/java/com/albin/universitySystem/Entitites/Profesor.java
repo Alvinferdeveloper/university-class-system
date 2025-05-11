@@ -24,6 +24,9 @@ public class Profesor {
     String lastName;
     @Column(nullable = false, length = 50)
     String email;
+
+    @Column(nullable = false)
+    String password;
     String phone;
     @Column(nullable = false)
     Date birthDate;
