@@ -22,6 +22,6 @@ public class AlumnoRequestDTO {
     private String email;
     private String phone;
     private String dni;
-    @NotNull(message = "Debes proporcionar una carrers")
+    @NotNull(message = "Debes proporcionar una carrera")
     private Long carreraId;
 }

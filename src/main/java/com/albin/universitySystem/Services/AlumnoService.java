@@ -23,26 +23,16 @@ public class AlumnoService implements ICrud<AlumnoRequestDTO,AlumnoResponseDTO> 
     @Override
     public AlumnoResponseDTO insert(AlumnoRequestDTO alumno) {
         Alumno newAlumno = alumnoMapper.dtoToEntity(alumno);
-        Carrera carrera = carreraRepository.findById(alumno.getCarreraId()).orElseThrow(EntityNotFoundException::new);
-        newAlumno.setCarrera(carrera);
-        Alumno alumnoDoc = alumnoRepository.save(newAlumno);
-        return alumnoMapper.entityToDto(alumnoDoc);
+        newAlumno = alumnoRepository.save(newAlumno);
+        return alumnoMapper.entityToDto(newAlumno);
     }
 
     @Override
     public AlumnoResponseDTO update(Long id, AlumnoRequestDTO alumno) {
         Alumno alumnoDoc = alumnoRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Alumno no encontrado"));
-        alumnoDoc.setName(alumno.getName());
-        alumnoDoc.setEmail(alumno.getEmail());
-        alumnoDoc.setLastName(alumno.getLastName());
-        alumnoDoc.setPhone(alumno.getPhone());
-        alumnoDoc.setDni(alumno.getDni());
-        alumnoDoc.setBirthDate(alumno.getBirthDay());
-        if(alumno.getCarreraId() != null ){
-            Carrera carrera = carreraRepository.findById(alumno.getCarreraId()).orElseThrow(EntityNotFoundException::new);
-            alumnoDoc.setCarrera(carrera);
-        }
-        Alumno alumnoUpdated = alumnoRepository.save(alumnoDoc);
+        Alumno alumnoUpdated = alumnoMapper.dtoToEntity(alumno);
+        alumnoUpdated.setId(alumnoDoc.getId());
+        alumnoUpdated = alumnoRepository.save(alumnoUpdated);
         return alumnoMapper.entityToDto(alumnoUpdated);
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/alumno")
-@PreAuthorize("denyAll()")
+@PreAuthorize("permitAll()")
 public class AlumnoController {
     @Autowired
     AlumnoService alumnoService;
