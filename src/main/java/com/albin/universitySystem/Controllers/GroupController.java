@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/group")
+@RequestMapping("/api/v1/groups")
 public class GroupController {
 
     private final GroupService groupService;
@@ -20,25 +20,25 @@ public class GroupController {
         this.groupService = groupService;
     }
 
-    @PostMapping("/addGroup")
-    public ResponseEntity<GroupResponseDTO> insertGroup(@Valid @RequestBody GroupRequestDTO group) {
+    @PostMapping
+    public ResponseEntity<GroupResponseDTO> createGroup(@Valid @RequestBody GroupRequestDTO group) {
         GroupResponseDTO newGroup = groupService.insert(group);
         return new ResponseEntity<>(newGroup, HttpStatus.CREATED);
     }
 
-    @GetMapping("getGroup/{id}")
-    public ResponseEntity<GroupResponseDTO> getGroup(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<GroupResponseDTO> getGroupById(@PathVariable Long id) {
         GroupResponseDTO group = groupService.findById(id);
         return ResponseEntity.ok(group);
     }
 
-    @GetMapping("getAllGroups")
+    @GetMapping
     public ResponseEntity<List<GroupResponseDTO>> getAllGroups() {
         List<GroupResponseDTO> groups = groupService.findAll();
         return ResponseEntity.ok(groups);
     }
 
-    @PutMapping("updateGroup/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<GroupResponseDTO> updateGroup(
             @Valid @RequestBody GroupRequestDTO group,
             @PathVariable Long id
@@ -47,7 +47,7 @@ public class GroupController {
         return ResponseEntity.ok(newGroup);
     }
 
-    @DeleteMapping("deleteGroup/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable Long id) {
         groupService.delete(id);
         return ResponseEntity.noContent().build();

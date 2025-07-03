@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/componente")
+@RequestMapping("/api/v1/componentes")
 @AllArgsConstructor
 public class ComponenteController {
     private final ComponenteService componenteService;
-    @PostMapping("/addComponente")
-    public ResponseEntity<ComponenteResponseDTO> insertComponente(@Valid  @RequestBody ComponenteRequestDTO componente) {
+    @PostMapping
+    public ResponseEntity<ComponenteResponseDTO> createComponente(@Valid  @RequestBody ComponenteRequestDTO componente) {
         ComponenteResponseDTO newComponente = componenteService.insert(componente);
         return ResponseEntity.ok(newComponente);
     }
-    @GetMapping("/getComponente/{id}")
-    public ResponseEntity<ComponenteResponseDTO> getComponente(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<ComponenteResponseDTO> getComponenteById(@PathVariable Long id){
         ComponenteResponseDTO componente =  componenteService.findById(id);
         return ResponseEntity.ok(componente);
     }
 
-    @PutMapping("/updateComponente/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ComponenteResponseDTO> updateComponente(
             @Valid @RequestBody ComponenteRequestDTO componente,
             @PathVariable Long id
@@ -35,13 +35,13 @@ public class ComponenteController {
         return ResponseEntity.ok(newComponente);
     }
 
-    @GetMapping("/getAllComponentes")
+    @GetMapping
     public ResponseEntity<List<ComponenteResponseDTO>> getAllComponentes() {
         List<ComponenteResponseDTO> componentes = componenteService.findAll();
         return ResponseEntity.ok(componentes);
     }
 
-    @DeleteMapping("/deleteComponente/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteComponente(@PathVariable Long id) {
         componenteService.delete(id);
         return ResponseEntity.noContent().build();

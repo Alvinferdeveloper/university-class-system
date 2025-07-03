@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/profesor")
+@RequestMapping("/api/v1/profesores")
 public class ProfesorController {
 
     private final ProfesorService profesorService;
@@ -20,25 +20,25 @@ public class ProfesorController {
         this.profesorService = profesorService;
     }
 
-    @PostMapping("/addProfesor")
-    public ResponseEntity<ProfesorResponseDTO> insertProfesor(@Valid @RequestBody ProfesorRequestDTO profesor) {
+    @PostMapping
+    public ResponseEntity<ProfesorResponseDTO> createProfesor(@Valid @RequestBody ProfesorRequestDTO profesor) {
         ProfesorResponseDTO newProfesor = profesorService.insert(profesor);
         return new ResponseEntity<>(newProfesor, HttpStatus.CREATED);
     }
 
-    @GetMapping("/getProfesor/{id}")
-    public ResponseEntity<ProfesorResponseDTO> getProfesor(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfesorResponseDTO> getProfesorById(@PathVariable Long id) {
         ProfesorResponseDTO profesor = profesorService.findById(id);
         return ResponseEntity.ok(profesor);
     }
 
-    @GetMapping("/getAllProfesores")
+    @GetMapping
     public ResponseEntity<List<ProfesorResponseDTO>> getAllProfesores() {
         List<ProfesorResponseDTO> profesores = profesorService.findAll();
         return ResponseEntity.ok(profesores);
     }
 
-    @PutMapping("/updateProfesor/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ProfesorResponseDTO> updateProfesor(
             @Valid @RequestBody ProfesorRequestDTO profesor,
             @PathVariable Long id
@@ -47,7 +47,7 @@ public class ProfesorController {
         return ResponseEntity.ok(updatedProfesor);
     }
 
-    @DeleteMapping("/deleteProfesor/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProfesor(@PathVariable Long id) {
         profesorService.delete(id);
         return ResponseEntity.noContent().build();
