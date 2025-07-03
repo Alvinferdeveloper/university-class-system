@@ -1,4 +1,4 @@
-package com.albin.universitySystem.Entitites;
+package com.albin.universitySystem.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,14 +10,14 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class Autoritie {
+public class Authority {
     @Id
     private long id;
     @Enumerated(EnumType.STRING)
-    private com.albin.universitySystem.Enums.Autoritie autoritie;
-    @ManyToMany(mappedBy = "autorities")
+    private com.albin.universitySystem.Enums.Authority authority;
+    @ManyToMany(mappedBy = "authorities")
     private List<Role>  roles;
-    @ManyToMany(mappedBy = "autorities")
+    @ManyToMany(mappedBy = "authorities")
     private List<Profesor> profesors;
 }
 

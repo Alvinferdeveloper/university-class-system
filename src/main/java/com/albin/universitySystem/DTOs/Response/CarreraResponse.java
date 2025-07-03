@@ -1,13 +1,12 @@
 package com.albin.universitySystem.DTOs.Response;
-import com.albin.universitySystem.Enums.Semester;
+
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class ComponenteResponseDTO {
+public class CarreraResponse {
     long id;
     String name;
-    int owner_year;
-    Semester semester;
+    int total_years;
 }

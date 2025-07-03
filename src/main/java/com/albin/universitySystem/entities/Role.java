@@ -1,4 +1,4 @@
-package com.albin.universitySystem.Entitites;
+package com.albin.universitySystem.entities;
 
 
 import jakarta.persistence.*;
@@ -21,10 +21,10 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String name;
     @ManyToMany
-    @JoinTable(name = "role_autoritie", joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "autoritie_id")
+    @JoinTable(name = "role_authority", joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
-    private List<Autoritie> autorities;
+    private List<Authority> authorities;
     @OneToMany(mappedBy = "role")
     private List<Profesor> profesores;
 }

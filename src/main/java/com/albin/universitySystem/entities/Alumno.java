@@ -1,4 +1,4 @@
-package com.albin.universitySystem.Entitites;
+package com.albin.universitySystem.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

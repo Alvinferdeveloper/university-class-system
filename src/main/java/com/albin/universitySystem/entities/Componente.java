@@ -1,4 +1,4 @@
-package com.albin.universitySystem.Entitites;
+package com.albin.universitySystem.entities;
 
 import com.albin.universitySystem.Enums.Semester;
 import jakarta.persistence.*;

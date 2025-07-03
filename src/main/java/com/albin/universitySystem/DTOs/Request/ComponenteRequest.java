@@ -1,6 +1,6 @@
 package com.albin.universitySystem.DTOs.Request;
 
-import com.albin.universitySystem.DTOs.GroupDTO;
+import com.albin.universitySystem.DTOs.Request.GroupRequest;
 import com.albin.universitySystem.Enums.Semester;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ComponenteRequestDTO {
+public class ComponenteRequest {
     @NotNull
     private String name;
     @NotNull

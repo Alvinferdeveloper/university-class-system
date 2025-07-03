@@ -1,10 +1,9 @@
 package com.albin.universitySystem.Services;
-
-import com.albin.universitySystem.DTOs.Request.GroupRequestDTO;
-import com.albin.universitySystem.DTOs.Response.GroupResponseDTO;
-import com.albin.universitySystem.Entitites.Componente;
-import com.albin.universitySystem.Entitites.Group;
-import com.albin.universitySystem.Entitites.Profesor;
+import com.albin.universitySystem.DTOs.Request.GroupRequest;
+import com.albin.universitySystem.DTOs.Response.GroupResponse;
+import com.albin.universitySystem.entities.Componente;
+import com.albin.universitySystem.entities.Group;
+import com.albin.universitySystem.entities.Profesor;
 import com.albin.universitySystem.Repositories.ComponenteRepository;
 import com.albin.universitySystem.Repositories.GroupRepository;
 import com.albin.universitySystem.Repositories.ProfesorRepository;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
+public class GroupService implements ICrud<GroupRequest, GroupResponse> {
 
     private final GroupRepository groupRepository;
     private final GroupMapper groupMapper;
@@ -33,14 +32,14 @@ public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
 
     @Override
     @Transactional
-    public GroupResponseDTO insert(GroupRequestDTO groupRequest) {
+    public GroupResponse insert(GroupRequest groupRequest) {
         Group group = groupMapper.dtoToEntity(groupRequest);
-        return getGroupResponseDTO(groupRequest, group);
+        return getGroupResponse(groupRequest, group);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public GroupResponseDTO findById(long id) {
+    public GroupResponse findById(long id) {
         Group group = groupRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Group not found with id: " + id));
         return groupMapper.entityToDto(group);
@@ -48,7 +47,7 @@ public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
 
     @Override
     @Transactional(readOnly = true)
-    public List<GroupResponseDTO> findAll() {
+    public List<GroupResponse> findAll() {
         return groupRepository.findAll().stream()
                 .map(groupMapper::entityToDto)
                 .collect(Collectors.toList());
@@ -56,12 +55,12 @@ public class GroupService implements ICrud<GroupRequestDTO, GroupResponseDTO> {
 
     @Override
     @Transactional
-    public GroupResponseDTO update(Long id, GroupRequestDTO groupRequest) {
+    public GroupResponse update(Long id, GroupRequest groupRequest) {
         Group group = groupRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Group not found with id: " + id));
-        return getGroupResponseDTO(groupRequest, group);
+        return getGroupResponse(groupRequest, group);
     }
 
-    private GroupResponseDTO getGroupResponseDTO(GroupRequestDTO groupRequest, Group group) {
+    private GroupResponse getGroupResponse(GroupRequest groupRequest, Group group) {
         Profesor profesor = profesorRepository.findById(groupRequest.getProfesorId()).orElseThrow(()-> new EntityNotFoundException("Profesor Not Found"));
         Componente componente = componenteRepository.findById(groupRequest.getComponenteId()).orElseThrow(()-> new EntityNotFoundException("Componente Not Found"));
         group.setProfesor(profesor);

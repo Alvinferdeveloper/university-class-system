@@ -1,7 +1,7 @@
 package com.albin.universitySystem.Controllers;
 
-import com.albin.universitySystem.DTOs.Request.ProfesorRequestDTO;
-import com.albin.universitySystem.DTOs.Response.ProfesorResponseDTO;
+import com.albin.universitySystem.DTOs.Request.ProfesorRequest;
+import com.albin.universitySystem.DTOs.Response.ProfesorResponse;
 import com.albin.universitySystem.Services.ProfesorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -21,30 +21,30 @@ public class ProfesorController {
     }
 
     @PostMapping
-    public ResponseEntity<ProfesorResponseDTO> createProfesor(@Valid @RequestBody ProfesorRequestDTO profesor) {
-        ProfesorResponseDTO newProfesor = profesorService.insert(profesor);
+    public ResponseEntity<ProfesorResponse> createProfesor(@Valid @RequestBody ProfesorRequest profesor) {
+        ProfesorResponse newProfesor = profesorService.insert(profesor);
         return new ResponseEntity<>(newProfesor, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfesorResponseDTO> getProfesorById(@PathVariable Long id) {
-        ProfesorResponseDTO profesor = profesorService.findById(id);
+    public ResponseEntity<ProfesorResponse> getProfesorById(@PathVariable Long id) {
+        ProfesorResponse profesor = profesorService.findById(id);
         return ResponseEntity.ok(profesor);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProfesorResponseDTO>> getAllProfesores() {
-        List<ProfesorResponseDTO> profesores = profesorService.findAll();
+    public ResponseEntity<List<ProfesorResponse>> getAllProfesores() {
+        List<ProfesorResponse> profesores = profesorService.findAll();
         return ResponseEntity.ok(profesores);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfesorResponseDTO> updateProfesor(
-            @Valid @RequestBody ProfesorRequestDTO profesor,
+    public ResponseEntity<ProfesorResponse> updateProfesor(
+            @Valid @RequestBody ProfesorRequest updateRequest,
             @PathVariable Long id
     ) {
-        ProfesorResponseDTO updatedProfesor = profesorService.update(id, profesor);
-        return ResponseEntity.ok(updatedProfesor);
+        ProfesorResponse updatedProfesorResponse = profesorService.update(id, updateRequest);
+        return ResponseEntity.ok(updatedProfesorResponse);
     }
 
     @DeleteMapping("/{id}")

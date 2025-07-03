@@ -1,7 +1,7 @@
 package com.albin.universitySystem.Controllers;
 
-import com.albin.universitySystem.DTOs.Request.ComponenteRequestDTO;
-import com.albin.universitySystem.DTOs.Response.ComponenteResponseDTO;
+import com.albin.universitySystem.DTOs.Request.ComponenteRequest;
+import com.albin.universitySystem.DTOs.Response.ComponenteResponse;
 import com.albin.universitySystem.Services.ComponenteService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,29 +16,29 @@ import java.util.List;
 public class ComponenteController {
     private final ComponenteService componenteService;
     @PostMapping
-    public ResponseEntity<ComponenteResponseDTO> createComponente(@Valid  @RequestBody ComponenteRequestDTO componente) {
-        ComponenteResponseDTO newComponente = componenteService.insert(componente);
+    public ResponseEntity<ComponenteResponse> createComponente(@Valid  @RequestBody ComponenteRequest componente) {
+        ComponenteResponse newComponente = componenteService.insert(componente);
         return ResponseEntity.ok(newComponente);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ComponenteResponseDTO> getComponenteById(@PathVariable Long id){
-        ComponenteResponseDTO componente =  componenteService.findById(id);
+    public ResponseEntity<ComponenteResponse> getComponenteById(@PathVariable Long id){
+        ComponenteResponse componente =  componenteService.findById(id);
         return ResponseEntity.ok(componente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ComponenteResponseDTO> updateComponente(
-            @Valid @RequestBody ComponenteRequestDTO componente,
+    public ResponseEntity<ComponenteResponse> updateComponente(
+            @Valid @RequestBody ComponenteRequest componente,
             @PathVariable Long id
     ) {
-        ComponenteResponseDTO newComponente = componenteService.update(id, componente);
+        ComponenteResponse newComponente = componenteService.update(id, componente);
         return ResponseEntity.ok(newComponente);
     }
 
     @GetMapping
-    public ResponseEntity<List<ComponenteResponseDTO>> getAllComponentes() {
-        List<ComponenteResponseDTO> componentes = componenteService.findAll();
-        return ResponseEntity.ok(componentes);
+    public ResponseEntity<List<ComponenteResponse>> getAllComponentes() {
+        List<ComponenteResponse> componenteResponses = componenteService.findAll();
+        return ResponseEntity.ok(componenteResponses);
     }
 
     @DeleteMapping("/{id}")

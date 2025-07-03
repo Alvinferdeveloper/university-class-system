@@ -1,15 +1,13 @@
 package com.albin.universitySystem.utils.mappers;
 
-import com.albin.universitySystem.DTOs.Request.GroupRequestDTO;
-import com.albin.universitySystem.DTOs.Response.GroupResponseDTO;
-import com.albin.universitySystem.Entitites.Componente;
-import com.albin.universitySystem.Entitites.Group;
-import com.albin.universitySystem.Entitites.Profesor;
+import com.albin.universitySystem.DTOs.Request.GroupRequest;
+import com.albin.universitySystem.DTOs.Response.GroupResponse;
+import com.albin.universitySystem.entities.Group;
 import com.albin.universitySystem.utils.IMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GroupMapper implements IMapper< GroupRequestDTO, Group, GroupResponseDTO> {
+public class GroupMapper implements IMapper<GroupRequest, Group, GroupResponse> {
     
     private final ProfesorMapper profesorMapper;
     private final ComponenteMapper componenteMapper;
@@ -20,7 +18,7 @@ public class GroupMapper implements IMapper< GroupRequestDTO, Group, GroupRespon
     }
 
     @Override
-    public Group dtoToEntity(GroupRequestDTO dto) {
+    public Group dtoToEntity(GroupRequest dto) {
         return Group
                 .builder()
                 .semester(dto.getSemester())
@@ -29,14 +27,8 @@ public class GroupMapper implements IMapper< GroupRequestDTO, Group, GroupRespon
     }
 
     @Override
-    public GroupResponseDTO entityToDto(Group entity) {
-        GroupResponseDTO dto = new GroupResponseDTO();
-        dto.setId(entity.getId());
-        dto.setProfesor(profesorMapper.entityToDto(entity.getProfesor()));
-        dto.setComponente(componenteMapper.entityToDto(entity.getComponente()));
-        dto.setSemester(entity.getSemester());
-        dto.setYear(entity.getYear());
-        return GroupResponseDTO
+    public GroupResponse entityToDto(Group entity) {
+        return GroupResponse
                 .builder()
                 .id(entity.getId())
                 .profesor(profesorMapper.entityToDto(entity.getProfesor()))

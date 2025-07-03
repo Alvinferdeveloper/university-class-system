@@ -1,8 +1,4 @@
 package com.albin.universitySystem.Services;
-
-import com.albin.universitySystem.DTOs.Request.AlumnoRequestDTO;
-import com.albin.universitySystem.DTOs.Response.AlumnoResponseDTO;
-
 import java.util.List;
 
 public interface ICrud<V, K> {

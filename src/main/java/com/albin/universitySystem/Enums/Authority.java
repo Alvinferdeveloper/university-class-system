@@ -1,6 +1,6 @@
 package com.albin.universitySystem.Enums;
 
-public enum Autoritie {
+public enum Authority {
     INSERT_ALUMNO,
     DELETE_ALUMNO,
     UPDATE_ALUMNO,

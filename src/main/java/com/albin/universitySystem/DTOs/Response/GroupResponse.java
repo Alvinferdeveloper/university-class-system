@@ -1,21 +1,19 @@
-package com.albin.universitySystem.DTOs.Request;
+package com.albin.universitySystem.DTOs.Response;
 
 import com.albin.universitySystem.Enums.Semester;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GroupRequestDTO {
-    @NotNull
-    private Long profesorId;
-    @NotNull
-    private Long componenteId;
-    @NotNull
+public class GroupResponse {
+    private long id;
+    private ProfesorResponse profesor;
+    private ComponenteResponse componente;
     private Semester semester;
-    @NotNull
     private Integer year;
 }

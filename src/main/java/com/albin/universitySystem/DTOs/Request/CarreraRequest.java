@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CarreraRequestDTO {
+public class CarreraRequest {
     @NotNull
     String name;
     @NotNull

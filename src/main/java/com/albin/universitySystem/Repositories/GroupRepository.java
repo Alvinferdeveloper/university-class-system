@@ -1,6 +1,6 @@
 package com.albin.universitySystem.Repositories;
 
-import com.albin.universitySystem.Entitites.Group;
+import com.albin.universitySystem.entities.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

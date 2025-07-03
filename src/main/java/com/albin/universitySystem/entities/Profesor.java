@@ -1,4 +1,4 @@
-package com.albin.universitySystem.Entitites;
+package com.albin.universitySystem.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,9 +32,9 @@ public class Profesor {
     Date birthDate;
     String dni;
     @ManyToMany
-    @JoinTable(name = "profesor_autoritie", joinColumns = @JoinColumn(name = "profesor_id"),
-    inverseJoinColumns = @JoinColumn(name = "autoritie_id"))
-    List<Autoritie> autorities;
+    @JoinTable(name = "profesor_authority", joinColumns = @JoinColumn(name = "profesor_id"),
+    inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    List<Authority> authorities;
     @ManyToOne
     @JoinColumn(name = "role_id")
     Role role;

@@ -1,9 +1,9 @@
 package com.albin.universitySystem.DTOs.Request;
 
-import com.albin.universitySystem.Entitites.Autoritie;
-import com.albin.universitySystem.Entitites.Carrera;
-import com.albin.universitySystem.Entitites.Group;
-import com.albin.universitySystem.Entitites.Role;
+import com.albin.universitySystem.entities.Authority;
+import com.albin.universitySystem.entities.Carrera;
+import com.albin.universitySystem.entities.Group;
+import com.albin.universitySystem.entities.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ProfesorRequestDTO {
+public class ProfesorRequest {
     @NotNull
     private String name;
     @NotNull

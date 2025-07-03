@@ -1,7 +1,7 @@
 package com.albin.universitySystem.Controllers;
 
-import com.albin.universitySystem.DTOs.Request.GroupRequestDTO;
-import com.albin.universitySystem.DTOs.Response.GroupResponseDTO;
+import com.albin.universitySystem.DTOs.Request.GroupRequest;
+import com.albin.universitySystem.DTOs.Response.GroupResponse;
 import com.albin.universitySystem.Services.GroupService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -21,30 +21,30 @@ public class GroupController {
     }
 
     @PostMapping
-    public ResponseEntity<GroupResponseDTO> createGroup(@Valid @RequestBody GroupRequestDTO group) {
-        GroupResponseDTO newGroup = groupService.insert(group);
+    public ResponseEntity<GroupResponse> createGroup(@Valid @RequestBody GroupRequest group) {
+        GroupResponse newGroup = groupService.insert(group);
         return new ResponseEntity<>(newGroup, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GroupResponseDTO> getGroupById(@PathVariable Long id) {
-        GroupResponseDTO group = groupService.findById(id);
+    public ResponseEntity<GroupResponse> getGroupById(@PathVariable Long id) {
+        GroupResponse group = groupService.findById(id);
         return ResponseEntity.ok(group);
     }
 
     @GetMapping
-    public ResponseEntity<List<GroupResponseDTO>> getAllGroups() {
-        List<GroupResponseDTO> groups = groupService.findAll();
+    public ResponseEntity<List<GroupResponse>> getAllGroups() {
+        List<GroupResponse> groups = groupService.findAll();
         return ResponseEntity.ok(groups);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GroupResponseDTO> updateGroup(
-            @Valid @RequestBody GroupRequestDTO group,
+    public ResponseEntity<GroupResponse> updateGroup(
+            @Valid @RequestBody GroupRequest updateRequest,
             @PathVariable Long id
     ) {
-        GroupResponseDTO newGroup = groupService.update(id,group);
-        return ResponseEntity.ok(newGroup);
+        GroupResponse updatedGroupResponse = groupService.update(id,updateRequest);
+        return ResponseEntity.ok(updatedGroupResponse);
     }
 
     @DeleteMapping("/{id}")

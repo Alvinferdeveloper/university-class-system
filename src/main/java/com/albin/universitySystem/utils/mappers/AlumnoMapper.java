@@ -1,19 +1,16 @@
 package com.albin.universitySystem.utils.mappers;
 
-import com.albin.universitySystem.DTOs.Request.AlumnoRequestDTO;
-import com.albin.universitySystem.DTOs.Response.AlumnoResponseDTO;
-import com.albin.universitySystem.Entitites.Alumno;
-import com.albin.universitySystem.Entitites.Carrera;
-import com.albin.universitySystem.Repositories.AlumnoRepository;
+import com.albin.universitySystem.DTOs.Request.AlumnoRequest;
+import com.albin.universitySystem.DTOs.Response.AlumnoResponse;
+import com.albin.universitySystem.entities.Alumno;
+import com.albin.universitySystem.entities.Carrera;
 import com.albin.universitySystem.Repositories.CarreraRepository;
 import com.albin.universitySystem.utils.IMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.Locale;
-
 @Component
-public class AlumnoMapper implements IMapper<AlumnoRequestDTO, Alumno, AlumnoResponseDTO> {
+public class AlumnoMapper implements IMapper<AlumnoRequest, Alumno, AlumnoResponse> {
     CarreraMapper carreraMapper;
     CarreraRepository carreraRepository;
     public AlumnoMapper(CarreraMapper carreraMapper, CarreraRepository carreraRepository) {
@@ -21,7 +18,7 @@ public class AlumnoMapper implements IMapper<AlumnoRequestDTO, Alumno, AlumnoRes
         this.carreraRepository = carreraRepository;
     }
     @Override
-    public  Alumno dtoToEntity(AlumnoRequestDTO alumnoDTO) {
+    public  Alumno dtoToEntity(AlumnoRequest alumnoDTO) {
         Carrera carrera = carreraRepository.findById(alumnoDTO.getCarreraId()).orElseThrow(()->new EntityNotFoundException("Carrera not found"));
         return Alumno.builder()
                 .name(alumnoDTO.getName())
@@ -34,9 +31,9 @@ public class AlumnoMapper implements IMapper<AlumnoRequestDTO, Alumno, AlumnoRes
                 .build();
     }
     @Override
-    public AlumnoResponseDTO entityToDto(Alumno alumno) {
+    public AlumnoResponse entityToDto(Alumno alumno) {
 
-        return AlumnoResponseDTO.builder()
+        return AlumnoResponse.builder()
                 .id(alumno.getId())
                 .birthDay(alumno.getBirthDate())
                 .name(alumno.getName())

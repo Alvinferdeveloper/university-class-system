@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class RoleRequestDTO {
+public class RoleRequest {
     @NotNull
     private Long id;
     @NotNull

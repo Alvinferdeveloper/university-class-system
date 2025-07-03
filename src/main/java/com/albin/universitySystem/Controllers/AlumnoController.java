@@ -1,11 +1,10 @@
 package com.albin.universitySystem.Controllers;
 
-import com.albin.universitySystem.DTOs.Request.AlumnoRequestDTO;
-import com.albin.universitySystem.DTOs.Response.AlumnoResponseDTO;
+import com.albin.universitySystem.DTOs.Request.AlumnoRequest;
+import com.albin.universitySystem.DTOs.Response.AlumnoResponse;
 import com.albin.universitySystem.Services.AlumnoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,36 +13,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/alumnos")
-@PreAuthorize("permitAll()")
 public class AlumnoController {
     @Autowired
     AlumnoService alumnoService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<AlumnoResponseDTO> createAlumno(@Valid @RequestBody AlumnoRequestDTO alumno) {
-        AlumnoResponseDTO newAlumno = alumnoService.insert(alumno);
+    @PostMapping()
+    public ResponseEntity<AlumnoResponse> createAlumno(@Valid @RequestBody AlumnoRequest alumno) {
+        AlumnoResponse newAlumno = alumnoService.insert(alumno);
         return ResponseEntity.ok(newAlumno);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('PROFESOR')")
-    public ResponseEntity<AlumnoResponseDTO> getAlumnoById(@PathVariable Long id) {
-        AlumnoResponseDTO alumno = alumnoService.findById(id);
+    public ResponseEntity<AlumnoResponse> getAlumnoById(@PathVariable Long id) {
+        AlumnoResponse alumno = alumnoService.findById(id);
         return ResponseEntity.ok(alumno);
     }
 
     @GetMapping
-    public ResponseEntity<List<AlumnoResponseDTO>> getAllAlumnos() {
-        List<AlumnoResponseDTO> alumnos = alumnoService.findAll();
+    public ResponseEntity<List<AlumnoResponse>> getAllAlumnos() {
+        List<AlumnoResponse> alumnos = alumnoService.findAll();
         return ResponseEntity.ok(alumnos);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlumnoResponseDTO> updateAlumno(
+    public ResponseEntity<AlumnoResponse> updateAlumno(
             @PathVariable Long id,
-            @RequestBody AlumnoRequestDTO alumno) {
-        AlumnoResponseDTO newAlumno = alumnoService.update(id, alumno);
-        return ResponseEntity.ok(newAlumno);
+            @RequestBody AlumnoRequest updateRequest) {
+        AlumnoResponse updatedAlumnoResponse = alumnoService.update(id, updateRequest);
+        return ResponseEntity.ok(updatedAlumnoResponse);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('DELETE_ALUMNO')")
