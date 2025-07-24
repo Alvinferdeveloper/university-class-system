@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailService implements UserDetailsService{
+public class UserDetailServiceImpl implements UserDetailsService{
     private final ProfesorRepository profesorRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,7 +27,7 @@ public class UserDetailService implements UserDetailsService{
                 .stream()
                 .map(Authority::getAuthority)
                 .map(authority -> new SimpleGrantedAuthority(authority.name()))
-                .collect(Collectors.toSet());
+                .forEach(authorities::add);
 
         return new User(profesor.getEmail(), profesor.getPassword(),  authorities);
     }
